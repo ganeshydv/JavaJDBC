@@ -7,13 +7,37 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 public class AppServer {
-    private static final String PACKAGE_SERVER = "com.user.api";
-    private static final String APP_NAME = "test";
-    public static void crateServer(int port,String connectorName){
+    private static String PACKAGE_SERVER = "com.user.api";
+    private static String APP_NAME = "test";
+    public static void crateServer(int port,String connectorName,String pkgs){
+        APP_NAME=connectorName;
+        PACKAGE_SERVER=PACKAGE_SERVER+(pkgs==null?"":";"+pkgs.trim());
+        System.out.println("Packages : "+PACKAGE_SERVER);
         Server server = new Server();
-        server.addConnector(createConnector(server,port,APP_NAME));
+        server.addConnector(createConnector(server,port,connectorName));
 
-        server.setHandler(createCollectionHandler(PACKAGE_SERVER,APP_NAME,"/api"));
+        server.setHandler(createCollectionHandler(PACKAGE_SERVER,connectorName,"/api"));
+        try {
+            server.start();
+            server.join();
+        }catch (Exception e){
+            System.out.println(e);
+        }finally {
+            System.out.println("closing server...");
+            server.destroy();
+        }
+    }
+
+    public static void crateServer(int port,String connectorName,String pkgs, String ContextPath, String subPath){
+        APP_NAME=connectorName;
+        PACKAGE_SERVER=PACKAGE_SERVER+(pkgs==null?"":";"+pkgs.trim());
+
+        System.out.println("App Name: "+APP_NAME);
+        System.out.println("Packages : "+PACKAGE_SERVER);
+        Server server = new Server();
+        server.addConnector(createConnector(server,port,connectorName));
+
+        server.setHandler(createCollectionHandler(PACKAGE_SERVER,connectorName,ContextPath,subPath));
         try {
             server.start();
             server.join();
@@ -29,6 +53,7 @@ public class AppServer {
     private static ServerConnector createConnector(Server server,int port,String name){
         ServerConnector connector=new ServerConnector(server);
         connector.setPort(port);
+        System.out.println("Connector Name: "+name);
         connector.setName(name);
         return connector;
     }
@@ -37,6 +62,11 @@ public class AppServer {
     private static HandlerCollection createCollectionHandler(String pkgName,String appName,String contextPath){
         HandlerCollection collection=new HandlerCollection();
         collection.addHandler(createApiContextHandlers(pkgName,appName,contextPath));
+        return collection;
+    }
+    private static HandlerCollection createCollectionHandler(String pkgName,String appName,String contextPath, String subPath){
+        HandlerCollection collection=new HandlerCollection();
+        collection.addHandler(createApiContextHandlers(pkgName,appName,contextPath, subPath));
         return collection;
     }
 
@@ -60,10 +90,30 @@ public class AppServer {
         return apiContextHandler;
     }
 
+    private static ServletContextHandler createApiContextHandlers(String pkgName, String appName, String contextPath, String subPath){
+
+        //3.1 create container
+        ServletContainer container=new ServletContainer(createResourceConfig(pkgName,appName));
+
+        //3.2 create Holder
+        ServletHolder servletHolder =new ServletHolder(container);
+
+        //3.3 add holder to contextHandler
+        ServletContextHandler apiContextHandler=new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
+        apiContextHandler.addServlet(servletHolder,subPath+"/*"); // map servlet holder to specific path. see useful : api/v1/* in this pkg
+
+        apiContextHandler.setContextPath(contextPath); // address= ip:port/contextPath
+        System.out.println("path: "+contextPath+subPath);
+        System.out.println("Context Handler Name: "+APP_NAME);
+        apiContextHandler.setVirtualHosts(new String[]{"@"+APP_NAME}); //compulsory "@" //this ServletContextHandler host name== connector name
+
+        return apiContextHandler;
+    }
+
     //2
     private static ResourceConfig createResourceConfig(String apiPkgs, String appName){
         ResourceConfig config=new ResourceConfig();
-        config.packages(true,"com.user.api");
+        config.packages(true,apiPkgs);
 //        config.setApplicationName(appName); //not important
         config.register(MultiParts.class);
         return config;
