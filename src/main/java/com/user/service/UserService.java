@@ -11,9 +11,7 @@ import java.sql.Statement;
 public class UserService {
     //get user data
     private static final UserService userSerViceInstance=new UserService();
-    private UserService(){
-
-    }
+    private UserService(){}
     public static UserService getInstance(){
         return userSerViceInstance;
     }
