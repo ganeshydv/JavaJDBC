@@ -1,4 +1,4 @@
-package com.appA;
+package com.app;
 
 import com.server.config.AppServer;
 

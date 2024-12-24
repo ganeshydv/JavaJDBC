@@ -28,10 +28,10 @@
         <executions>
           <execution>
             <phase>package</phase> <!-- This is optional; it is the default phase for this plugin -->
-<!--            <goals>-->
-<!--              <goal>jar</goal> &lt;!&ndash; You can specify the goal here &ndash;&gt;-->
-<!--              -->
-<!--            </goals>-->
+            <goals>
+              <goal>jar</goal> <!-- You can specify the goal here -->
+
+            </goals>
             <configuration>
               <archive>
                 <manifestEntries>

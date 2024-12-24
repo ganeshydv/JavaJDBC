@@ -9,6 +9,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 public class AppServer {
     private static String PACKAGE_SERVER = "com.user.api";
     private static String APP_NAME = "test";
+    private AppServer(){}
     public static void crateServer(int port,String connectorName,String pkgs){
         APP_NAME=connectorName;
         PACKAGE_SERVER=PACKAGE_SERVER+(pkgs==null?"":";"+pkgs.trim());

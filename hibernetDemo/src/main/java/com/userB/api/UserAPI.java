@@ -32,4 +32,19 @@ public class UserAPI {
 
         return Response.ok().entity("{\"message\":"+ outer.toString()+"}").build();
     }
+
+    @Path("tree")
+    @GET()
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response Btree(){
+        return Response.ok().entity("").build();
+    }
+    class  Btree{
+
+    }
+    class Node{
+        int val;
+        Node left;
+        Node right;
+    }
 }

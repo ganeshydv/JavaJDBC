@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/hibernetDemo">
       <sourceFolder url="file://$MODULE_DIR$/hibernetDemo/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hibernetDemo/src/main/resources" type="java-resource" />
     </content>
   </component>
 </module>
