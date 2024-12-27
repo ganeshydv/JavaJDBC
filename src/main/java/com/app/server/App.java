@@ -1,4 +1,4 @@
-package org.example;
+package com.app.server;
 
 import com.database.config.UserDatabase;
 import com.server.config.AppServer;
