@@ -21,31 +21,31 @@
     <jersey.version>2.28</jersey.version>
     <jetty.version>9.4.14.v20181114</jetty.version>
   </properties>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.2</version>
-        <executions>
-          <execution>
-            <phase>package</phase> <!-- This is optional; it is the default phase for this plugin -->
-            <goals>
-              <goal>jar</goal> <!-- You can specify the goal here -->
+<!--  <build>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-jar-plugin</artifactId>-->
+<!--        <version>3.2.2</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>package</phase> &lt;!&ndash; This is optional; it is the default phase for this plugin &ndash;&gt;-->
+<!--            <goals>-->
+<!--              <goal>jar</goal> &lt;!&ndash; You can specify the goal here &ndash;&gt;-->
 
-            </goals>
-            <configuration>
-              <archive>
-                <manifestEntries>
-                  <Main-Class>com.app.server.App</Main-Class>
-                </manifestEntries>
-              </archive>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <archive>-->
+<!--                <manifestEntries>-->
+<!--                  <Main-Class>com.app.server.App</Main-Class>-->
+<!--                </manifestEntries>-->
+<!--              </archive>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </build>-->
 
 
   <dependencies>

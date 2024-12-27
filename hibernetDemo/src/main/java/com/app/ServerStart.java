@@ -7,6 +7,6 @@ public class ServerStart {
         // DB config and connection
 
         // check packages
-        AppServer.crateServer(4000,"hibernet","com.userB","/api","/v2");
+        AppServer.crateServer(4000,"hibernetDemo","com.userB","/api","/v2");
     }
 }

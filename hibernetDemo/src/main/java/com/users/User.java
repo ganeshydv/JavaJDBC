@@ -1,15 +1,13 @@
-package com.userB;
+package com.users;
 
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
+//@Entity
+//@Table(name="Users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+//    @Id
+//    @GeneratedValue
     private long id;
     private String username;
     private String email;
