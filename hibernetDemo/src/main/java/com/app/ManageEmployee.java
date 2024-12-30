@@ -1,9 +1,7 @@
 package com.app;
-
-
 import java.util.List;
-        import java.util.Date;
         import java.util.Iterator;
+import java.util.stream.Stream;
 
 import com.db.HibernateUtil;
 import com.users.Employee;
@@ -77,13 +75,15 @@ public class ManageEmployee {
 
         try {
             tx = session.beginTransaction();
-            List employees = session.createQuery("FROM Employee").list();
+            List<Employee> employees = session.createQuery("FROM Employee").list();
             for (Iterator iterator = employees.iterator(); iterator.hasNext();){
                 Employee employee = (Employee) iterator.next();
                 System.out.print("First Name: " + employee.getFirstName());
                 System.out.print("  Last Name: " + employee.getLastName());
                 System.out.println("  Salary: " + employee.getSalary());
+
             }
+//            Stream<Employee> employeeStream= Stream.of(employees);
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();

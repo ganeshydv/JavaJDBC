@@ -37,7 +37,7 @@
 <!--            <configuration>-->
 <!--              <archive>-->
 <!--                <manifestEntries>-->
-<!--                  <Main-Class>com.app.server.App</Main-Class>-->
+<!--                  <Main-Class>com.app.App</Main-Class>-->
 <!--                </manifestEntries>-->
 <!--              </archive>-->
 <!--            </configuration>-->

@@ -60,7 +60,7 @@ public class UserAPI {
         for(int num:nums){
             int n=outer.size();
             for(int i=0;i<n;i++){
-                // i=0; outer:[{}] --> inner: {} : {1} --> outer [{},{1}]
+                //i=0; outer:[{}] --> inner: {} : {1} --> outer [{},{1}]
                 //i=0; outer [{},{1}] --> inner {} :{2} --> outer  [{},{1},{2}]
                 //i=1; outer  [{},{1},{2}] --> inner {1}: {1,2} --> outer  [{},{1},{2},{1,2}]
                 List<Integer> inner=new ArrayList<>(outer.get(i));

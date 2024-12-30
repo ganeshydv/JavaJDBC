@@ -1,7 +1,6 @@
 package com.db;
 
 import com.users.Employee;
-import com.users.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -10,7 +9,7 @@ public class HibernateUtil {
     static {
         try {
             Configuration configuration = new Configuration().configure();
-            configuration.addAnnotatedClass(Employee.class);
+            configuration.addAnnotatedClass(Employee.class); //register entity POJO class
             sessionFactory =configuration.buildSessionFactory();
         }catch (Throwable e){
             throw new ExceptionInInitializerError(e);
